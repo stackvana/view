@@ -1,0 +1,17 @@
+{
+  "name": "view",
+  "version": "0.5.0",
+  "description": "A View engine",
+  "keywords": [
+    "view",
+    "resource",
+    "resources"
+  ],
+  "scripts": {
+    "test": "tap test/*.*"
+  },
+  "main": "./index.js",
+  "dependencies": {
+    "cheerio": "0.9.x"
+  }
+}

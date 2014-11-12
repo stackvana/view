@@ -8,7 +8,7 @@ var test = require("tap").test,
 test("start a view server", function(t) {
   view = require('../'),
   http = require('resource-http');
-  http.listen(function(err, _server) {
+  http.listen({}, function(err, _server) {
     t.error(err, 'no error');
     t.ok(_server, 'server is returned');
     server = _server;
@@ -21,14 +21,14 @@ test("load a view/layout with http and view.middle", function(t) {
     t.error(err, 'no error');
     t.ok(_view, 'view is returned');
 
-    server.before('404').use(view.middle({view: _view})).as('view');
+    server.use(view.middle({view: _view}));
 
     supertest(server)
       .get('/root')
       .end(function(err, res){
         if (err) throw err;
         t.error(err, 'no error');
-        t.equal(res.text, '<h1>big</h1>\n<div id="main"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+        t.equal(res.text, '<h1>big</h1>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
           'response returns correct result');
         t.end();
     });
@@ -39,14 +39,14 @@ test("load nested view/layout with http and view.middle", function(t) {
   view.create( { path: __dirname + "/view18" } , function(err, _view) {
     t.error(err, 'no error');
     t.ok(_view, 'view is returned');
-    server.before('404').use(view.middle({view: _view})).as('view');
+    server.use(view.middle({view: _view}));
     supertest(server) // first test index
       .get('/index')
       .end(function(err, res){
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>big</h1>\n<h2>nothing</h2>\n<div id="main"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+          '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
           'response returns correct result');
     });
 
@@ -56,7 +56,7 @@ test("load nested view/layout with http and view.middle", function(t) {
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>nothing</h1>\n<h2>big</h2>\n<div id="main"><div class="table">steve</div>\n</div>',
+          '<h1>nothing</h1>\n<h2>big</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
           'response returns correct result');
         t.end();
     });
@@ -67,7 +67,7 @@ test("load nested views/layouts with http and view.middle", function(t) {
   view.create( { path: __dirname + "/view19" } , function(err, _view) {
     t.error(err, 'no error');
     t.ok(_view, 'view is returned');
-    server.before('404').use(view.middle({view: _view})).as('view');
+    server.use(view.middle({view: _view}));
 
     supertest(server) // first test index2
       .get('/index2')
@@ -75,7 +75,7 @@ test("load nested views/layouts with http and view.middle", function(t) {
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>big</h1>\n<h2>nothing</h2>\n<div id="main"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+          '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
           'response returns correct result');
     });
 
@@ -85,7 +85,7 @@ test("load nested views/layouts with http and view.middle", function(t) {
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>big</h1>\n<h2>nothing</h2>\n<div id="main"><div class="table">steve</div>\n</div>',
+          '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
           'response returns correct result');
     });
 
@@ -95,7 +95,7 @@ test("load nested views/layouts with http and view.middle", function(t) {
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>nothing</h1>\n<h2>big</h2>\n<div id="main"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+          '<h1>nothing</h1>\n<h2>big</h2>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
           'response returns correct result');
     });
 
@@ -105,7 +105,7 @@ test("load nested views/layouts with http and view.middle", function(t) {
         if (err) throw err;
         t.error(err, 'no error');
         t.equal(res.text,
-          '<h1>nothing</h1>\n<h2>big</h2>\n<div id="main"><div class="table">steve</div>\n</div>',
+          '<h1>nothing</h1>\n<h2>big</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
           'response returns correct result');
         t.end();
     });

@@ -19,7 +19,10 @@
     "cheerio": "0.9.x"
   },
   "devDependencies": {
-    "tap": "0.4.x"
+    "tap": "0.4.x",
+    "supertest": "*",
+    "resource-http": "0.5.x"
+    
   },
   "license": "MIT",
   "author": "Marak Squires <support@marak.com>"

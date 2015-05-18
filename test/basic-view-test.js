@@ -328,3 +328,18 @@ test("nested views, nested layouts affect only appropriate directory level", fun
     });
   });
 });
+
+test("start a view with a layout, but set useLayout to false", function (t) {
+  view.create( { path: __dirname + "/view10" } , function(err, _view) {
+    t.error(err, 'no error');
+    t.ok(_view, 'view is returned');
+    _view.index.present({ useLayout: false }, function (err, result) {
+      t.error(err, 'no error');
+      t.ok(result, 'present returns result');
+      t.equal(result,
+        '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n',
+        'present() returns correct result');
+      t.end();
+    });
+  });
+});

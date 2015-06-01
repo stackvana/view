@@ -4,6 +4,8 @@ var test = require("tap").test,
 
 var marak = 'https://raw.githubusercontent.com/Marak/marak.com/master/view';
 
+// TODO: fix issues with relative paths with /faker.js versus /faker.js/ and relative paths
+
 test("create a remote view to github.com/marak/marak.com", function (t) {
   view.create( { remote: marak } , function (err, v) {
     t.error(err, 'no error');
@@ -60,3 +62,29 @@ test("create attempt to load /css/styles.css", function (t) {
     t.end();
   });
 });
+
+test("attempt to load /faker.js/", function (t) {
+  _view.remote('/faker.js/', function (err, result) {
+    t.error(err, 'no error');
+    t.equal(result.substr(0, 45), '<!DOCTYPE html>\n<html lang="en">\n  <head>\n   ');
+    t.end();
+  });
+});
+
+test("attempt to load /faker.js", function (t) {
+  _view.remote('/faker.js', function (err, result) {
+    t.error(err, 'no error');
+    t.equal(result.substr(0, 45), '<!DOCTYPE html>\n<html lang="en">\n  <head>\n   ');
+    t.end();
+  });
+});
+
+test("attempt to load /faker.js/js/prettyPrint.js", function (t) {
+  _view.remote('/faker.js/js/prettyPrint.js', function (err, result) {
+    t.error(err, 'no error');
+    t.equal(result.substr(0, 45), '/*\n AUTHOR James Padolsey (http://james.padol');
+    t.end();
+  });
+});
+
+// TODO: tests for presenters and layout presenters

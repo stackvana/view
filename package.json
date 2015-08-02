@@ -1,10 +1,10 @@
 {
   "name": "view",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "A View engine",
-  "repository" : {
-    "type" : "git",
-    "url" : "http://github.com/bigcompany/view.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bigcompany/view.git"
   },
   "keywords": [
     "view",
@@ -16,13 +16,15 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "cheerio": "0.9.x"
+    "cheerio": "0.9.x",
+    "colors": "*",
+    "highlight.js": "^8.7.0",
+    "marked": "^0.3.4"
   },
   "devDependencies": {
     "tap": "0.4.x",
     "supertest": "*",
     "resource-http": "0.5.x"
-    
   },
   "license": "MIT",
   "author": "Marak Squires <support@marak.com>"

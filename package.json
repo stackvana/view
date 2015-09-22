@@ -1,6 +1,6 @@
 {
   "name": "view",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A View engine",
   "repository": {
     "type": "git",
@@ -20,7 +20,8 @@
     "colors": "*",
     "highlight.js": "^8.7.0",
     "hyperquest": "^1.2.0",
-    "marked": "^0.3.4"
+    "marked": "^0.3.4",
+    "through2": "2.0.x"
   },
   "devDependencies": {
     "tap": "0.4.x",

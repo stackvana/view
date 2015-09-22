@@ -4,7 +4,7 @@ module['exports'] = function (options, callback) {
 
   $('.user > .name').html('Bob');
   $('.user > .email').html('bob@bob.com');
-  $('.time').html(options.time);
+  $('.time').html(options.time.toString());
 
   $('h1').html('big');
 

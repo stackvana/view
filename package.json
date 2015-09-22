@@ -16,9 +16,10 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "cheerio": "0.9.x",
+    "cheerio": "0.19.x",
     "colors": "*",
     "highlight.js": "^8.7.0",
+    "hyperquest": "^1.2.0",
     "marked": "^0.3.4"
   },
   "devDependencies": {

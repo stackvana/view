@@ -322,7 +322,7 @@ test("nested views, nested layouts affect only appropriate directory level", fun
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
       t.equal(result,
-        '<h1>nothing</h1>\n<h2>big</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
+        '<h1>sublayout</h1>\n<h2>big</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
         'present() returns correct result');
       t.end();
     });
@@ -338,6 +338,36 @@ test("start a view with a layout, but set useLayout to false", function (t) {
       t.ok(result, 'present returns result');
       t.equal(result,
         '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n',
+        'present() returns correct result');
+      t.end();
+    });
+  });
+});
+
+
+test("nested views, view finds parent layout if view has no layout", function(t) {
+  view.create( { path: __dirname + "/view21" } , function(err, _view) {
+    t.error(err, 'no error');
+    t.ok(_view, 'view is returned');
+    _view.index.present({}, function (err, result) {
+      t.error(err, 'no error');
+      t.ok(result, 'present returns result');
+      t.equal(result,
+        '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+        'present() returns correct result');
+    });
+    _view.test.table.present({}, function (err, result) {
+      t.error(err, 'no error');
+      t.ok(result, 'present returns result');
+      t.equal(result,
+        '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="table">steve</div>\n</div>',
+        'present() returns correct result');
+    });
+    _view.test.sub.foo.present({}, function (err, result) {
+      t.error(err, 'no error');
+      t.ok(result, 'present returns result');
+      t.equal(result,
+        '<h1>big</h1>\n<h2>nothing</h2>\n<div class="yield"><div class="table">Bobby</div>\n</div>',
         'present() returns correct result');
       t.end();
     });

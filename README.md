@@ -89,6 +89,8 @@ module['exports'] = function examplePresenter(opts, cb) {
 }
 ```
 
+Our unit tests will give a much better idea on how this works in practice.
+
 ### Layouts / Nested Layouts
 
 A simple layout pattern is available for Views.

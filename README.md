@@ -73,7 +73,7 @@ For example:
 ```
 
 ```js
-module['exports'] = function examplePresenter(opts, cb) {
+module['exports'] = function examplePresenter(opts, callback) {
   // this.$ is a jQuery like selector with it's HTML context set to the current `View.template`
   var $ = this.$;
 

@@ -7,3 +7,5 @@ module['exports'] = function (options, callback) {
 
   callback(null, $.html());
 };
+
+module['exports'].useParentLayout = false;

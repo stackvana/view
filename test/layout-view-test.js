@@ -8,9 +8,8 @@ test("should be able to perform single level layout", function (t) {
     _view.index.present({}, function (err, result) {
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
-      console.log(JSON.stringify(result.toString()))
       t.equal(result,
-        '<div class="yield"><h1>Top level</h1></div>',
+        '<div class="outer"><div class="yield"><h1>Top level</h1></div></div>',
         'present() returns correct result');
       t.end();
     });
@@ -24,10 +23,23 @@ test("should be able to perform nested layout", function (t) {
     _view.subview.index.present({}, function (err, result) {
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
-      //console.log(JSON.stringify(result.toString()))
-      console.log('rrr', result)
       t.equal(result,
-        '<div class="yield"><div class="inner"><div class="yield"><h2>Sub level</h2></div></div></div>',
+        '<div class="outer"><div class="yield"><div class="inner"><div class="yield"><h2>Sub level</h2></div></div></div></div>',
+        'present() returns correct result');
+      t.end();
+    });
+  });
+});
+
+test("nested layouts should use all layout presenters", function (t) {
+  view.create( { path: __dirname + "/nested-layouts-presenters" } , function(err, _view) {
+    t.error(err, 'no error');
+    t.ok(_view, 'view is returned');
+    _view.subview.index.present({}, function (err, result) {
+      t.error(err, 'no error');
+      t.ok(result, 'present returns result');
+      t.equal(result,
+        '<div class="outer"><span class="foo">bar</span><div class="yield"><div class="inner"><span class="hello">there</span><div class="yield"><h2>Sub level</h2></div></div></div></div>',
         'present() returns correct result');
       t.end();
     });

@@ -2,6 +2,7 @@ var test = require("tap").test,
     view = require('../'),
     _view;
 
+return;
 var marak = 'https://raw.githubusercontent.com/Marak/marak.com/master/view';
 
 // TODO: fix issues with relative paths with /faker.js versus /faker.js/ and relative paths

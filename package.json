@@ -26,7 +26,7 @@
   "devDependencies": {
     "tap": "0.4.x",
     "supertest": "*",
-    "resource-http": "0.5.x"
+    "resource-http": "1.x.x"
   },
   "license": "MIT",
   "author": "Marak Squires <support@marak.com>"

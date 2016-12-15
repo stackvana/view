@@ -8,7 +8,7 @@ var test = require("tap").test,
 test("start a view server", function(t) {
   view = require('../'),
   http = require('resource-http');
-  http.listen({}, function(err, _server) {
+  http.listen({ port: 8888 }, function(err, _server) {
     t.error(err, 'no error');
     t.ok(_server, 'server is returned');
     server = _server;

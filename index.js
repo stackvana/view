@@ -2,6 +2,7 @@ var view = {};
 
 var View = view.View = require('./lib/View');
 view.middle = require('./lib/middle');
+view.parseUrlAsView = require('./lib/parseUrlAsView');
 
 view.create = function (options, callback) {
   options = options || {};

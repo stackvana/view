@@ -2,6 +2,9 @@
 
 A View-Presenter pattern for JavaScript.
 
+[![Build Status](https://travis-ci.org/bigcompany/view.svg?branch=master)](https://travis-ci.org/bigcompany/view) 
+[![Coverage Status](https://coveralls.io/repos/github/bigcompany/view/badge.svg?branch=master)](https://coveralls.io/github/bigcompany/view?branch=master)
+
 ## Installation
 
     npm install view

@@ -12,7 +12,9 @@
     "resources"
   ],
   "scripts": {
-    "test": "tap test/*.*"
+    "test": "tap test/*.*",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "report": "nyc tap test/*.*"
   },
   "main": "./index.js",
   "dependencies": {
@@ -25,9 +27,33 @@
     "through2": "2.0.x"
   },
   "devDependencies": {
-    "tap": "0.4.x",
+    "coveralls": "^3.0.0",
+    "nyc": "^11.2.1",
+    "request": "^2.75.0",
+    "resource-http": "1.x.x",
     "supertest": "*",
-    "resource-http": "1.x.x"
+    "tap": "0.4.11"
+  },
+  "nyc": {
+    "all": false,
+    "include": [
+      "lib/*.js"
+    ],
+    "exclude": [
+      "coverage",
+      "locales",
+      "modules",
+      "reports",
+      "test",
+      "node_modules",
+      "lib/remote.js"
+    ],
+    "reporter": [
+      "html",
+      "lcov",
+      "clover"
+    ],
+    "report-dir": "./reports/coverage"
   },
   "license": "MIT",
   "author": "Marak Squires <support@marak.com>"

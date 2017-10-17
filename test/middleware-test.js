@@ -246,3 +246,61 @@ test("stop a view server", function(t) {
     t.end();
   });
 });
+
+
+test("start a view server", function(t) {
+  view = require('../'),
+  http = require('resource-http');
+  http.listen({ port: 8888 }, function(err, _server) {
+    t.error(err, 'no error');
+    t.ok(_server, 'server is returned');
+    server = _server;
+    t.end();
+  });
+});
+
+test("load autoindex view", function(t) {
+  view.create( { path: __dirname + "/autoindex", autoindex: true } , function(err, _view) {
+    t.error(err, 'no error');
+    t.ok(_view, 'view is returned');
+    server.use(view.middle({view: _view}));
+
+    supertest(server) // first test index2
+      .get('/')
+      .end(function(err, res){
+        if (err) throw err;
+        t.error(err, 'no error');
+        // when using curl, returns as json
+        var rsp = JSON.parse(res.text)
+        t.equal(rsp[0], '/a')
+        t.equal(rsp[1], '/b')
+        t.equal(rsp[2], '/c')
+        t.equal(rsp[3], '/d')
+        t.end();
+      });
+
+  });
+});
+
+test("drill into nested autoindex", function(t) {
+  supertest(server) // first test index2
+      .get('/a')
+      .end(function(err, res){
+        if (err) throw err;
+        t.error(err, 'no error');
+        // when using curl, returns as json
+        var rsp = JSON.parse(res.text)
+        t.equal(rsp[0], '/e')
+        t.equal(rsp[1], '/f')
+        t.equal(rsp[2], '/g')
+        t.end();
+      });
+
+});
+
+test("stop a view server", function(t) {
+  server.server.close(function(err) {
+    t.ok(!err, 'no error');
+    t.end();
+  });
+});

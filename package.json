@@ -21,6 +21,7 @@
     "highlight.js": "^8.7.0",
     "hyperquest": "^1.2.0",
     "marked": "^0.3.4",
+    "route-parser": "0.0.5",
     "through2": "2.0.x"
   },
   "devDependencies": {

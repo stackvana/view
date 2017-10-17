@@ -6,3 +6,5 @@ module.exports = function urlParamsPresenter (opts, cb) {
     view: 'index'
   });
 };
+
+module.exports.route = ":id";

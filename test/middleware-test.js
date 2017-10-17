@@ -47,18 +47,15 @@ test("load a view/layout with http and view.middle", function(t) {
       .get('/user/0')
       .end(function(err, res){
         if (err) throw err;
-        console.log('bbb', res.body)
         t.error(err, 'no error');
-        t.equal(res.body.id, '0');
+        t.equal(res.body.user_id, '0');
         t.equal(res.body.view, 'user');
         t.end();
     });
   });
 });
 
-
-
-/* TODO: nested url params / regex routing
+/* TODO: implement nested parsing of view url params 
 test("load a view/layout with http and view.middle", function(t) {
   view.create({ path: __dirname + "/view-url-params" } , function(err, _view) {
     t.error(err, 'no error');
@@ -71,14 +68,16 @@ test("load a view/layout with http and view.middle", function(t) {
       .end(function(err, res, body){
         if (err) throw err;
         t.error(err, 'no error');
-        t.equal(res.body.id, '1');
+        t.equal(res.body.user_id, '0');
+        t.equal(res.body.report_id, '1');
         t.equal(res.body.view, 'report');
         t.end();
     });
   });
 });
 */
-//return;
+
+/* TODO: nested url params / regex routing */
 
 test("stop a view server", function(t) {
   server.server.close(function(err) {

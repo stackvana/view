@@ -6,3 +6,5 @@ module.exports = function urlParamsPresenter (opts, cb) {
     view: 'report'
   });
 };
+
+module.exports.route = ":report_id";

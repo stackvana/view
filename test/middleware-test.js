@@ -1,5 +1,4 @@
 var test = require("tap").test,
-  resource = require("resource"),
   supertest = require('supertest'),
   http,
   view,

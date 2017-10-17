@@ -271,6 +271,7 @@ test("load autoindex view", function(t) {
         t.error(err, 'no error');
         // when using curl, returns as json
         var rsp = JSON.parse(res.text)
+        console.log('rsp', rsp)
         t.equal(rsp[0], '/a')
         t.equal(rsp[1], '/b')
         t.equal(rsp[2], '/c')

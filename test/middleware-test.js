@@ -260,8 +260,7 @@ test("start a view server", function(t) {
 
 /* 
 
-  Remark: autoindex tests are not passing on travis for some reason. are working locally
-
+autoindex tests are not passing on travis but are passing locally for some reason 
 
 test("load autoindex view", function(t) {
   view.create( { path: __dirname + "/autoindex", autoindex: true } , function(err, _view) {
@@ -302,10 +301,11 @@ test("drill into nested autoindex", function(t) {
 
 });
 
+*/
+
 test("stop a view server", function(t) {
   server.server.close(function(err) {
     t.ok(!err, 'no error');
     t.end();
   });
 });
-*/

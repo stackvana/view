@@ -1,10 +1,10 @@
 
 module['exports'] = function (options, callback) {
 
-	  var $ = this.$;
+  var $ = this.$;
 
-		$('.table').html('steve');
+$('.table').html('steve');
 
-		callback(null, $.html());
+callback(null, $.html());
 };
 

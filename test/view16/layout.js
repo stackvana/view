@@ -1,4 +1,3 @@
-
 module['exports'] = function (options, callback) {
 
   var $ = this.$;

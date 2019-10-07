@@ -25,7 +25,7 @@ test("start a view with a layout and presenter that has a cache", function (t) {
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
       t.equal(result,
-        '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n\t<div class="time">' + first + '</div>\n</div>\n',
+        '<div class="user">\n  <div class="name">Bob</div>\n  <div class="email">bob@bob.com</div>\n  <div class="time">' + first + '</div>\n</div>\n',
         'present() returns correct result');
       setTimeout(function(){
         t.end();
@@ -40,7 +40,7 @@ test("run the same view and expected a cached result", function (t) {
     t.error(err, 'no error');
     t.ok(result, 'present returns result');
     t.equal(result,
-      '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n\t<div class="time">' + first + '</div>\n</div>\n',
+      '<div class="user">\n  <div class="name">Bob</div>\n  <div class="email">bob@bob.com</div>\n  <div class="time">' + first + '</div>\n</div>\n',
       'present() returns correct result');
       setTimeout(function(){
         t.end();
@@ -55,7 +55,7 @@ test("run the same view some time after the cache has expired and get the new re
     t.error(err, 'no error');
     t.ok(result, 'present returns result');
     t.equal(result,
-    '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n\t<div class="time">' + now + '</div>\n</div>\n',
+    '<div class="user">\n  <div class="name">Bob</div>\n  <div class="email">bob@bob.com</div>\n  <div class="time">' + now + '</div>\n</div>\n',
     'present() returns correct result');
     setTimeout(function(){
       t.end();
@@ -69,7 +69,7 @@ test("run the same view and expected the new cached result", function (t) {
     t.error(err, 'no error');
     t.ok(result, 'present returns result');
     t.equal(result,
-      '<div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n\t<div class="time">' + second + '</div>\n</div>\n',
+      '<div class="user">\n  <div class="name">Bob</div>\n  <div class="email">bob@bob.com</div>\n  <div class="time">' + second + '</div>\n</div>\n',
       'present() returns correct result');
       t.end();
   });

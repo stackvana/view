@@ -1,6 +1,6 @@
 module['exports'] = function (options, callback) {
   var $ = this.$;
-  $('h2').html('big');
+  $('h2').html('child h2');
   callback(null, $.html());
 };
 

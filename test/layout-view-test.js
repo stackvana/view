@@ -151,9 +151,6 @@ test("layout presenter should run before template presenter", function (t) {
   });
 });
 
-
-// Note: Removed ability for directly modifying templates from code as of 10/7/2019
-/*
 test("layout presenter should modify a template before the template presenter is called", function (t) {
   view.create( { path: __dirname + "/view8" } , function(err, _view) {
     t.error(err, 'no error');
@@ -162,15 +159,13 @@ test("layout presenter should modify a template before the template presenter is
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
       t.equal(result,
-        '<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div></div>',
+        '<div class="yield">\n<div class="user"><div class="name">Bob</div><div class="email">bob@bob.com</div>\n</div></div>',
         'present() returns correct result');
       t.end();
     });
   });
 });
-*/
 
-/*
 test("layout presenter should be able to modify template presenter", function (t) {
   view.create( { path: __dirname + "/view9" } , function(err, _view) {
     t.error(err, 'no error');
@@ -183,9 +178,7 @@ test("layout presenter should be able to modify template presenter", function (t
     });
   });
 });
-*/
 
-/*
 test("template presenter should be able to modify layout html", function (t) {
   view.create( { path: __dirname + "/view10" } , function(err, _view) {
     t.error(err, 'no error');
@@ -194,13 +187,12 @@ test("template presenter should be able to modify layout html", function (t) {
       t.error(err, 'no error');
       t.ok(result, 'present returns result');
       t.equal(result,
-        '<h1>big</h1>\n<div class="yield"><div class="user">\n\t<div class="name">Bob</div>\n\t<div class="email">bob@bob.com</div>\n</div>\n</div>',
+        '<h1>big</h1>\n<div class="yield"><div class="user">\n  <div class="name">Bob</div>\n  <div class="email">bob@bob.com</div>\n</div>\n</div>',
         'present() returns correct result');
       t.end();
     });
   });
 });
-*/
 
 test("multiple views with a layout and presenter", function (t) {
   view.create( { path: __dirname + "/view11" } , function(err, _view) {

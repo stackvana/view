@@ -29,41 +29,82 @@ function dumpViews (v) {
       if (stat.isFile()) {
         // TOOD: what if we want to pass data into the presenter?
         function presentView (data) {
-          v.views[subview].present(data, function (err, html){
-            if (err) {
-              throw err;
-            }
-            let writePath;
-            if (data.path) {
-              writePath = path.normalize(root + '/' + v.views[subview].path.replace('./view', ''));
-              writePath = writePath.replace('index.js', '');
-              writePath += data.path + '.html';
-              console.log("SPECIAL", data.path, writePath)
-              // if we are rendering a .js based view, it's the presenter for html
-            } else {
-              writePath = path.normalize(root + '/' + v.views[subview].path.replace('./view', ''));
-              // if we are rendering a .js based view, it's the presenter for html
-            }
-            writePath = writePath.replace('.js', '.html');
-            console.log('writePathwritePathwritePath', writePath)
-            //let contents = fs.readFileSync(sourcePath);
-            fs.writeFileSync(writePath, html);
-          });
+        // console.log('v.views[subview].path', v.views[subview].path)
+          
+          // scope is required for async presenters!
+          (function(subview){
+
+            subview.present(data, function (err, html){
+              console.log('completed', subview.path, err)
+              if (err) {
+                console.log('ERROR', err)
+                throw err;
+                process.exit();
+              }
+              let writePath;
+              if (data.path) {
+                writePath = path.normalize(root + '/' + subview.path.replace('./view', ''));
+                writePath = writePath.replace('index.js', '');
+                writePath += data.path + '.html';
+                // if we are rendering a .js based view, it's the presenter for html
+              } else {
+                writePath = path.normalize(root + '/' + subview.path.replace('./view', ''));
+                // if we are rendering a .js based view, it's the presenter for html
+              }
+              writePath = writePath.replace('.js', '.html');
+              // console.log('writePath', writePath)
+              //let contents = fs.readFileSync(sourcePath);
+              fs.writeFileSync(writePath, html);
+            });
+            
+          })(v.views[subview])
         }
 
-        presentView({});
+        presentView({
+          req: {
+            resource: {
+              params: {}
+            }
+          }
+        });
 
         if (v.views[subview].presenter && v.views[subview].presenter.dataset) {
-          // console.log('v.views[subview].presenter', v.views[subview].presenter.dataset)
-          // empty / default data
-          // use data found in module.exports.dataset
-          let arr = Object.keys(v.views[subview].presenter.dataset);
-          arr.forEach(function(page){
-            // console.log('presenting page', page)
-            presentView({
-              path: page
-            })
-          });
+          let dataset = v.views[subview].presenter.dataset;
+          if (typeof dataset === 'object') {
+            // console.log('v.views[subview].presenter', v.views[subview].presenter.dataset)
+            // empty / default data
+            // use data found in module.exports.dataset
+            let arr = Object.keys(dataset);
+            arr.forEach(function(page){
+              // console.log('presenting page', page)
+              presentView({
+                path: page,
+                req: {
+                  resource: {
+                    params: {}
+                  }
+                }
+              })
+            });
+          }
+
+          // TODO: dataset might be async function or event emitter ( for paginated results )
+          if (typeof dataset === 'function') {
+            dataset(function(err, results){
+              let arr = Object.keys(results);
+              arr.forEach(function(page){
+                // console.log('presenting page', page)
+                presentView({
+                  path: page,
+                  req: {
+                    resource: {
+                      params: results[page]
+                    }
+                  }
+                })
+              });
+            });
+          }
         }
         
       } else {
